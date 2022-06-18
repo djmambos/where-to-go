@@ -1,6 +1,6 @@
 ## Where to go
 
-Это приложение для тех, кто хочет где-то побывать, но не знает где.
+This app is for those who want to go somewhere but don't know where
 
 Author: djmambos
 
