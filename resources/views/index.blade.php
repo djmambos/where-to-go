@@ -13,26 +13,44 @@
     <!-- Main button for search random place -->
     <div id="wrapper" class="">
         <div class="">
-            <button id="search_country" class="btn btn__search" type="submit">
+            <button id="search_country_btn" class="btn btn__search" type="submit">
                 Where to go? 🤨
             </button>
         </div>
     </div>
 
     <section id="country_section" class="section section__country hidden">
-        <h1 class="section__title">🇩🇪 Germany</h1>
-        <p>Germany (German: Deutschland, pronounced [ˈdɔʏtʃlant] (listen)), officially the Federal Republic of Germany,[e] is a country in Central Europe. It is the second most populous country in Europe after Russia and the most populous member state of the European Union. Germany is situated between the Baltic and North seas to the north, and the Alps to the south; it covers an area of 357,022 square kilometres (137,847 sq mi), with a population of over 83 million within its 16 constituent states. Germany borders Denmark to the north, Poland and the Czech Republic to the east, Austria and Switzerland to the south and France, Luxembourg, Belgium and the Netherlands to the west. The nation's capital and largest city is Berlin and its financial centre is Frankfurt; the largest urban area is the Ruhr.</p>
+        <h1 id="country_title" class="section__title"></h1>
+        <p id="country_description" class=""></p>
     </section>
 
 </main>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <script>
-    const btnSearch = document.querySelector('#search_country');
     const countrySection = document.querySelector('#country_section');
 
-    btnSearch.addEventListener('click', () => {
-        btnSearch.classList.add('hidden');
-        countrySection.classList.remove('hidden');
+    $(document).ready(function () {
+        let btnSearch = $('#search_country_btn');
+        let countrySection = $('#country_section');
+
+        // Add click event for search place button
+       $(btnSearch).click(function () {
+            btnSearch.addClass('hidden');
+            countrySection.removeClass('hidden');
+            $.get('/get_country')
+                .done(function (data) {
+                    let countryDescription = data.description;
+                    let iso2 = data.iso_2;
+                    let name_en = data.name_en;
+
+                    let countrySection = $('#country_section');
+                    console.log(countrySection.find('#country_title'));
+                    countrySection.find('#country_title').text(`${iso2} ${name_en}`);
+                    countrySection.find('#country_description').text(countryDescription);
+                });
+       });
     });
 
 </script>
