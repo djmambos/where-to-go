@@ -32,7 +32,7 @@ class ParseCountries extends Command
     }
 
     /**
-     * Execute the console command.
+     * Attention! Use 1 time!
      *
      * @return int
      */

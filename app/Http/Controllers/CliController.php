@@ -26,7 +26,7 @@ class CliController extends Controller
             $countryName = trim($tdListInRow[3]->innerHtml);
 
             echo 'Insert ' . $countryName . PHP_EOL;
-            DB::table('countries')->insert([
+            DB::table('countries')->updateOrInsert([
                 'iso_2' => $countryCode,
                 'name_en' => $countryName,
                 'name_ru' => '',
